@@ -1,0 +1,14 @@
+
+import javax.swing.JOptionPane;
+
+public class JOP {
+	/* I used this class to print out messages on the computer. This was my form of GUI*/
+
+	public static void msg(String msg) {// This method prints a message on screen
+		JOptionPane.showMessageDialog(null, msg);
+	}
+	
+	public static String in(String msg){ // this methos print a message on screen and gets an input
+		return JOptionPane.showInputDialog(msg);
+	}
+}
