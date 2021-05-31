@@ -1,0 +1,107 @@
+import java.util.ArrayList;
+
+public class world 
+{
+	ArrayList<message> messages = new ArrayList<message>(); // this is where the message system is with all the messages stored
+	int NumOfStartMessages =10;
+	
+	
+	public world() // constructor that makes the message system object.
+	{
+		for(int i = 0; i < NumOfStartMessages; i++) {
+			message obj = new message();
+			messages.add(obj);
+		}
+		
+		Action();
+	}
+	
+	
+	public String AllMessages() // this method returns all the messages in a list order
+	{
+		int counter = 1;
+		String allmessages ="";
+		
+		for(int i = 0; i < messages.size(); i++)
+		{
+			allmessages += counter + ". - " + messages.get(i).toString() + "\n";
+			counter++;
+		}
+		
+		return allmessages;
+	}
+	
+	public String filterID(String ID) // this method returns all the messages in list order of only the messaes with a certain machine ID
+	{
+		int counter = 1;
+		String filteredmessages ="";
+		
+		for(int i = 0; i < messages.size(); i++)
+		{
+			if(messages.get(i).getID().equalsIgnoreCase(ID)){
+			filteredmessages += counter + ". - " + messages.get(i).toString() + "\n";
+			counter++;
+			}
+		}
+		
+		return filteredmessages;
+	}
+	
+	public String filterMessages(String message) // this method returns all the messages in list order only if the messages have a certain message
+	{
+		int counter = 1;
+		String filteredmessages ="";
+		
+		for(int i = 0; i < messages.size(); i++)
+		{
+			if(containsKeyword(messages.get(i).getMessage(), message)){
+			filteredmessages += counter + ". - " + messages.get(i).toString() + "\n";
+			counter++;
+			}
+		}
+		
+		if(counter == 1) {return "NO MESSAGES MATCH THAT MACHINE ID \n";}
+		
+		return filteredmessages;
+	}
+	
+	public boolean containsKeyword(String sentence, String keyword) // checks and returns boolean a sentence parameter has a certain keyword. Waste of code
+	{
+		String sentence2 = " " + sentence + " ";
+		String keyword2 = " " + keyword + " ";
+		
+		
+		if(sentence2.indexOf(keyword2) != -1)
+			return true;
+		else return false;
+	}
+	
+	public void Action() // this is a bunk of the code where you are presented the list of messages and asked what you would like to do. This method
+						 // checks what you want to do and sees if it matches the options.
+	{
+		String action = JOP.in(AllMessages() + "Would you like to (remove message)/(add message)/(filter by ID/keyword)?");
+		
+		if(action.equalsIgnoreCase("remove") || action.equalsIgnoreCase("remove message"))
+		{
+			String number = JOP.in(AllMessages() + "Which number would you like to remove?");
+			int num = Integer.parseInt(number);
+			messages.remove(num -1);
+		}
+		else if(action.equalsIgnoreCase("add") || action.equalsIgnoreCase("add message"))
+		{
+			String ID = JOP.in("What is the Machine ID: ");
+			String message = JOP.in("What is the message: ");
+			message obj = new message(ID, message);
+			messages.add(obj);
+		}
+		else if(action.equalsIgnoreCase("filter ID") || action.equalsIgnoreCase("filter machineID") || action.equalsIgnoreCase("filter messages by ID") || action.equalsIgnoreCase("filter messages by MachineID"))
+		{
+			String temp = JOP.in(AllMessages() + "Which ID would you like to filter?");
+			
+			String move = JOP.in(filterID(temp) + "Would you like to (remove message)//(filter by ID/keyword)?");
+		}
+		
+	}
+	
+	
+}
