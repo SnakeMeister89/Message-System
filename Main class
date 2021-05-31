@@ -1,0 +1,13 @@
+
+public class main {
+
+	
+	/*
+		- This is my main class that runs my program and makes the message system object.
+			 */
+	public static void main(String[] args) {
+		world World = new world();
+
+	}
+
+}
