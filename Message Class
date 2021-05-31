@@ -1,0 +1,49 @@
+
+public class message {
+	//machineID:message
+	
+	
+	/* 
+	 * This class is where each method is stored. I need this class because  i use an arraylist of 
+	 * message objects to make my list.
+	 */
+	String machineID; // stores the machineID of the message object
+	String message; // stores the message of the message object
+	String[] IDs = {"client", "server", "webserver"}; //this is all the possible machineIDs to be randomly selected
+	String[] messages = {"there is an error", "we are being hacked", "i love you", "someone just loged in", "please reset"}; // this is all the possible messages to be random selescted.
+	
+	public message(String machineID, String message){ //this constructor makes the message object with specific name and ID
+		this.machineID = machineID; 
+		this.message = message;
+	}
+	
+	public message(){ //This constructor makes a message object with a random message and random ID
+		RandomMachineID(); 
+		RandomMessage();
+	}
+	
+	public void RandomMachineID(){ // gets a random machine ID from the ID array
+		int index = (int)Math.random() * IDs.length;
+		machineID = IDs[index];
+	}
+	
+	public void RandomMessage(){ // gets a random message from the messages array
+		int index = (int)Math.random() * messages.length;
+		message = messages[index];
+	}
+	
+	public String toString(){ // turns the message object into a string
+		return machineID + ":" + message;
+	}
+	
+	public String getID() // returns ID
+	{
+		return machineID;
+	}
+	
+	public String getMessage() // returns message
+	{
+		return message;
+	}
+	
+}
